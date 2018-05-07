@@ -26,9 +26,11 @@ public class SnapInEdit : MonoBehaviour
         changeLabel(cubePos.x, cubePos.z);
     }
 
+    //Changes the text to its current coordinates
     private void changeLabel(float xPos, float zPos)
     {
         cubeText = GetComponentInChildren<TextMesh>();
         cubeText.text = xPos / gridSize + "," + zPos / gridSize;
+        gameObject.name = cubeText.text;
     }
 }
