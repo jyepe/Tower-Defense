@@ -5,16 +5,22 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    const int cubeMovementFactor = 10;  //Amount to move the cube by
+    const int cubeMovementFactor = 10;       //Amount to move the cube by
     Vector3 cubePosition;                    //Current cube position
+    
+    
+
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         cubePosition = gameObject.transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+   
+
+    // Update is called once per frame
+    void Update () {
 	}
 
     
@@ -23,10 +29,13 @@ public class Waypoint : MonoBehaviour
         return cubeMovementFactor;
     }
 
+    
     public Vector3 getCubePosition()
     {
-        cubePosition.x = Mathf.RoundToInt(transform.position.x / cubeMovementFactor) * cubeMovementFactor;
-        cubePosition.z = Mathf.RoundToInt(transform.position.z / cubeMovementFactor) * cubeMovementFactor;
-        return cubePosition;
+        cubePosition.x = Mathf.RoundToInt(transform.position.x / cubeMovementFactor);
+        cubePosition.z = Mathf.RoundToInt(transform.position.z / cubeMovementFactor);
+        return new Vector3(cubePosition.x, 0f, cubePosition.z);
     }
+
+
 }

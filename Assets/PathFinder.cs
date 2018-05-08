@@ -5,14 +5,28 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour {
 
-    Dictionary<Vector3, Waypoint> path = new Dictionary<Vector3, Waypoint>();
+    Dictionary<Vector3, Waypoint> path = new Dictionary<Vector3, Waypoint>();               //Stores all waypoints and their positions
     Waypoint[] waypoints;
+    [SerializeField] Waypoint startCube;
+    [SerializeField] Waypoint endCube;
+    MeshRenderer topColor;
+    Vector3[] directions = { Vector3.left, Vector3.right, Vector3.back, Vector3.forward };  //Directions enemies can move in
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start ()
+    {
         waypoints = FindObjectsOfType<Waypoint>();
         loadCubes();
-	}
+        changeColor();
+        exploreNeighbors();
+    }
+
+    public Waypoint[] getStartAndEndPoints()
+    {
+        return new Waypoint[] { startCube, endCube };
+    }
+
+    
 
     //Puts all cubes in a dictionary and links to their position
     private void loadCubes()
@@ -25,9 +39,40 @@ public class PathFinder : MonoBehaviour {
             }
         }
     }
+    
+    
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    //Changes the color of start and end cubes
+    private void changeColor()
+    {
+        topColor = startCube.transform.Find("Quad (5)").GetComponent<MeshRenderer>();
+        topColor.material.color = Color.black;
+        topColor = endCube.transform.Find("Quad (5)").GetComponent<MeshRenderer>();
+        topColor.material.color = Color.blue;
+    }
+
+    //Given start cubes, calculate where each of neighbors should be located
+    private void exploreNeighbors()
+    {
+        Vector3[] neighborPositions = {
+                                        startCube.getCubePosition() + Vector3.left,
+                                        startCube.getCubePosition() + Vector3.right,
+                                        startCube.getCubePosition() + Vector3.back,
+                                        startCube.getCubePosition() + Vector3.forward
+                                      };
+
+        checkIfNeighborExist(neighborPositions);
+    }
+
+    //Check if calculated neighbor position exist in path
+    private void checkIfNeighborExist(Vector3[] neigbors)
+    {
+        foreach (Vector3 position in neigbors)
+        {
+            if (path.ContainsKey(position))
+            {
+                print("Checking position : " + position.x + "," + position.z);
+            }
+        }
+    }
 }

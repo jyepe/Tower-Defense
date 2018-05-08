@@ -204,6 +204,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4803533089817062, guid: fccd8e5f507537647a8d3e0203b589d5,
     type: 2}
   m_PrefabInternal: {fileID: 1808622026}
+--- !u!114 &615512915 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114312668301616510, guid: fccd8e5f507537647a8d3e0203b589d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1034782596}
+  m_Script: {fileID: 11500000, guid: 7efc178d42e1ccd44a766a2681492fc0, type: 3}
 --- !u!4 &615512917 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4803533089817062, guid: fccd8e5f507537647a8d3e0203b589d5,
@@ -241,6 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723456c09a610fe4b8035b5e81232f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startCube: {fileID: 615512915}
+  endCube: {fileID: 1667123723}
 --- !u!4 &1023432276
 Transform:
   m_ObjectHideFlags: 0
@@ -325,6 +333,16 @@ Prefab:
       propertyPath: gridSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114312668301616510, guid: fccd8e5f507537647a8d3e0203b589d5,
+        type: 2}
+      propertyPath: startCube
+      value: 
+      objectReference: {fileID: 615512915}
+    - target: {fileID: 114312668301616510, guid: fccd8e5f507537647a8d3e0203b589d5,
+        type: 2}
+      propertyPath: endCube
+      value: 
+      objectReference: {fileID: 1667123723}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fccd8e5f507537647a8d3e0203b589d5, type: 2}
   m_IsPrefabParent: 0
@@ -573,6 +591,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1667123723 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114312668301616510, guid: fccd8e5f507537647a8d3e0203b589d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 2029108446}
+  m_Script: {fileID: 11500000, guid: 7efc178d42e1ccd44a766a2681492fc0, type: 3}
 --- !u!4 &1667123725 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4803533089817062, guid: fccd8e5f507537647a8d3e0203b589d5,
