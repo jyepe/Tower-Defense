@@ -7,7 +7,7 @@ public class Waypoint : MonoBehaviour
 {
     const int cubeMovementFactor = 10;       //Amount to move the cube by
     Vector3 cubePosition;                    //Current cube position
-    
+    bool isExplored = false;                 //Has this cube been visited in the path finding algorithm
     
 
 
@@ -37,5 +37,13 @@ public class Waypoint : MonoBehaviour
         return new Vector3(cubePosition.x, 0f, cubePosition.z);
     }
 
+    public void setIsExplored(bool explored)
+    {
+        isExplored = explored;
+    }
 
+    public bool getIsExplored()
+    {
+        return isExplored;
+    }
 }

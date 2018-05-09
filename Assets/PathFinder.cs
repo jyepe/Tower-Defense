@@ -10,7 +10,7 @@ public class PathFinder : MonoBehaviour {
     [SerializeField] Waypoint startCube;
     [SerializeField] Waypoint endCube;
     MeshRenderer topColor;
-    Vector3[] directions = { Vector3.left, Vector3.right, Vector3.back, Vector3.forward };  //Directions enemies can move in
+    Queue<Waypoint> queue = new Queue<Waypoint>();
 
     // Use this for initialization
     void Start ()
@@ -18,8 +18,11 @@ public class PathFinder : MonoBehaviour {
         waypoints = FindObjectsOfType<Waypoint>();
         loadCubes();
         changeColor();
-        exploreNeighbors();
+        findPath();
+        //exploreNeighbors();
     }
+
+    
 
     public Waypoint[] getStartAndEndPoints()
     {
@@ -51,28 +54,59 @@ public class PathFinder : MonoBehaviour {
         topColor.material.color = Color.blue;
     }
 
+    //Finds the shortest path from start cube to end cube
+    private void findPath()
+    {
+        queue.Enqueue(startCube);
+
+        while(queue.Count > 0)
+        {
+            Waypoint currentCube = queue.Dequeue();
+            currentCube.setIsExplored(true);
+
+            if (currentCube == endCube)
+            {
+                break;
+            }
+
+            exploreNeighbors(currentCube);
+        }
+    }
+
     //Given start cubes, calculate where each of neighbors should be located
-    private void exploreNeighbors()
+    private void exploreNeighbors(Waypoint currentCube)
     {
         Vector3[] neighborPositions = {
-                                        startCube.getCubePosition() + Vector3.left,
-                                        startCube.getCubePosition() + Vector3.right,
-                                        startCube.getCubePosition() + Vector3.back,
-                                        startCube.getCubePosition() + Vector3.forward
+                                        currentCube.getCubePosition() + Vector3.left,
+                                        currentCube.getCubePosition() + Vector3.right,
+                                        currentCube.getCubePosition() + Vector3.back,
+                                        currentCube.getCubePosition() + Vector3.forward
                                       };
 
         checkIfNeighborExist(neighborPositions);
     }
 
     //Check if calculated neighbor position exist in path
-    private void checkIfNeighborExist(Vector3[] neigbors)
+    private void checkIfNeighborExist(Vector3[] neighbors)
     {
-        foreach (Vector3 position in neigbors)
+        foreach (Vector3 position in neighbors)
         {
             if (path.ContainsKey(position))
             {
-                print("Checking position : " + position.x + "," + position.z);
+                addCube(position);
             }
+        }
+    }
+
+    //Add a new cube to the queue
+    private void addCube(Vector3 position)
+    {
+        
+
+        if (!path[position].getIsExplored())
+        {
+            print("Adding " + position.x + "," + position.z);
+            queue.Enqueue(path[position]);
         }
     }
 }
