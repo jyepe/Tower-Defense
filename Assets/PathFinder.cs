@@ -11,25 +11,23 @@ public class PathFinder : MonoBehaviour {
     [SerializeField] Waypoint endCube;
     MeshRenderer topColor;
     Queue<Waypoint> queue = new Queue<Waypoint>();
-
-    // Use this for initialization
-    void Start ()
-    {
-        waypoints = FindObjectsOfType<Waypoint>();
-        loadCubes();
-        changeColor();
-        findPath();
-        //exploreNeighbors();
-    }
-
-    
+    Waypoint currentCube;
+    List<Waypoint> shortestPath = new List<Waypoint>();
 
     public Waypoint[] getStartAndEndPoints()
     {
         return new Waypoint[] { startCube, endCube };
     }
 
-    
+    public List<Waypoint> getShortestPath()
+    {
+        waypoints = FindObjectsOfType<Waypoint>();
+        loadCubes();
+        changeColor();
+        findPath();
+        findPathToEnd();
+        return shortestPath;
+    }
 
     //Puts all cubes in a dictionary and links to their position
     private void loadCubes()
@@ -42,8 +40,6 @@ public class PathFinder : MonoBehaviour {
             }
         }
     }
-    
-    
 
     //Changes the color of start and end cubes
     private void changeColor()
@@ -54,14 +50,14 @@ public class PathFinder : MonoBehaviour {
         topColor.material.color = Color.blue;
     }
 
-    //Finds the shortest path from start cube to end cube
+    //Finds all paths from start cube to all other cubes
     private void findPath()
     {
         queue.Enqueue(startCube);
 
         while(queue.Count > 0)
         {
-            Waypoint currentCube = queue.Dequeue();
+            currentCube = queue.Dequeue();
             currentCube.setIsExplored(true);
 
             if (currentCube == endCube)
@@ -69,12 +65,12 @@ public class PathFinder : MonoBehaviour {
                 break;
             }
 
-            exploreNeighbors(currentCube);
+            exploreNeighbors();
         }
     }
 
     //Given start cubes, calculate where each of neighbors should be located
-    private void exploreNeighbors(Waypoint currentCube)
+    private void exploreNeighbors()
     {
         Vector3[] neighborPositions = {
                                         currentCube.getCubePosition() + Vector3.left,
@@ -101,12 +97,26 @@ public class PathFinder : MonoBehaviour {
     //Add a new cube to the queue
     private void addCube(Vector3 position)
     {
-        
+        Waypoint cubeToAdd = path[position];
 
-        if (!path[position].getIsExplored())
+        if (!cubeToAdd.getIsExplored() && !queue.Contains(cubeToAdd))
         {
-            print("Adding " + position.x + "," + position.z);
-            queue.Enqueue(path[position]);
+            queue.Enqueue(cubeToAdd);
+            cubeToAdd.exploredFrom = currentCube;
         }
+    }
+
+    //Finds shortest path from start cube to end cube
+    private void findPathToEnd()
+    {
+        Waypoint currentCube = endCube;
+
+        while (currentCube != startCube)
+        {
+            shortestPath.Add(currentCube);
+            currentCube = currentCube.exploredFrom;
+        }
+
+        shortestPath.Reverse();
     }
 }

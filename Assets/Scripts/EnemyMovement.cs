@@ -6,21 +6,24 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    
+    PathFinder path;
 
 	// Use this for initialization
 	void Start ()
     {
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
+        path = FindObjectOfType<PathFinder>();
+        StartCoroutine(moveEnemy(path.getShortestPath()));
 	}
 
-    //Moves enemy along the blocks
-    private void moveEnemy()
+    //Moves enemy along the cubes
+    private IEnumerator moveEnemy(List<Waypoint> shortestPath)
     {
-        
+        for (int i = 0; i < shortestPath.Count; i++)
+        {
+            float xPosition = shortestPath[i].transform.position.x;
+            float zPosition = shortestPath[i].transform.position.z;
+            transform.position = new Vector3(xPosition, transform.position.y, zPosition);
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
