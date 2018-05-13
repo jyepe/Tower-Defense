@@ -34,7 +34,7 @@ public class PathFinder : MonoBehaviour {
     {
         foreach (Waypoint waypoint in waypoints)
         {
-            if (!path.ContainsKey(waypoint.getCubePosition()))       //If there isn't a duplpicate waypoint
+            if (!path.ContainsKey(waypoint.getCubePosition()) && waypoint.tag.ToLower() != "wallcube" && waypoint.tag.ToLower() != "turretcube")       //If there isn't a duplpicate waypoint
             {
                 path.Add(waypoint.getCubePosition(), waypoint);
             }
