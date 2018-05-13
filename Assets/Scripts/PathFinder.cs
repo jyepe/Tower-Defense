@@ -23,7 +23,7 @@ public class PathFinder : MonoBehaviour {
     {
         waypoints = FindObjectsOfType<Waypoint>();
         loadCubes();
-        changeColor();
+        //changeColor();
         findPath();
         findPathToEnd();
         return shortestPath;

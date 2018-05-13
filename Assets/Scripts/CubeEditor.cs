@@ -19,7 +19,7 @@ public class CubeEditor : MonoBehaviour
     void Update ()
     {
         snapCube();
-        changeLabel();
+        //changeLabel();
     }
 
     //Moves cube every 'gridSize' units in x and z axis
