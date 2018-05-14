@@ -21,12 +21,20 @@ public class PathFinder : MonoBehaviour {
 
     public List<Waypoint> getShortestPath()
     {
-        waypoints = FindObjectsOfType<Waypoint>();
-        loadCubes();
-        //changeColor();
-        findPath();
-        findPathToEnd();
-        return shortestPath;
+        if (shortestPath.Count == 0)
+        {
+            waypoints = FindObjectsOfType<Waypoint>();
+            loadCubes();
+            //changeColor();
+            findPath();
+            findPathToEnd();
+            return shortestPath;
+        }
+        else
+        {
+            return shortestPath;
+        }
+        
     }
 
     //Puts all cubes in a dictionary and links to their position
