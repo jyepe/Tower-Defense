@@ -14,10 +14,10 @@ public class PathFinder : MonoBehaviour {
     Waypoint currentCube;
     List<Waypoint> shortestPath = new List<Waypoint>();
 
-    public Waypoint[] getStartAndEndPoints()
-    {
-        return new Waypoint[] { startCube, endCube };
-    }
+    //public Waypoint[] getStartAndEndPoints()
+    //{
+    //    return new Waypoint[] { startCube, endCube };
+    //}
 
     public List<Waypoint> getShortestPath()
     {
@@ -25,7 +25,6 @@ public class PathFinder : MonoBehaviour {
         {
             waypoints = FindObjectsOfType<Waypoint>();
             loadCubes();
-            //changeColor();
             findPath();
             findPathToEnd();
             return shortestPath;
@@ -47,15 +46,6 @@ public class PathFinder : MonoBehaviour {
                 path.Add(waypoint.getCubePosition(), waypoint);
             }
         }
-    }
-
-    //Changes the color of start and end cubes
-    private void changeColor()
-    {
-        topColor = startCube.transform.Find("Quad (5)").GetComponent<MeshRenderer>();
-        topColor.material.color = Color.black;
-        topColor = endCube.transform.Find("Quad (5)").GetComponent<MeshRenderer>();
-        topColor.material.color = Color.blue;
     }
 
     //Finds all paths from start cube to all other cubes
