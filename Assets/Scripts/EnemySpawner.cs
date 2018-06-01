@@ -8,11 +8,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] EnemyMovement enemy;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        print("position of " + gameObject.name + " " + gameObject.transform.position);
         StartCoroutine(spawnEnemy());
-	}
+    }
 
     private IEnumerator spawnEnemy()
     {

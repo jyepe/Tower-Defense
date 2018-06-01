@@ -8,12 +8,12 @@ public class EnemyMovement : MonoBehaviour
 {
     PathFinder path;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         path = FindObjectOfType<PathFinder>();
         StartCoroutine(moveEnemy(path.getShortestPath()));
-	}
+    }
 
     //Moves enemy along the cubes
     private IEnumerator moveEnemy(List<Waypoint> shortestPath)

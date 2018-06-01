@@ -9,11 +9,6 @@ public class Tower : MonoBehaviour
     Transform enemy;                        //Enemy to look at
     [SerializeField] float range;           //The towers range 
     [SerializeField] ParticleSystem bullets;
-    
-
-    private void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update ()
@@ -29,7 +24,28 @@ public class Tower : MonoBehaviour
         if (enemies.Length != 0)
         {
             Transform closestEnemy = enemies[0].transform;
-            enemy = closestEnemy;
+
+            foreach (EnemyDamage enemy in enemies)
+            {
+                closestEnemy = getClosestEnemy(closestEnemy, enemy.transform);
+            }
+
+            this.enemy = closestEnemy;
+        }
+    }
+
+    private Transform getClosestEnemy(Transform closestEnemy, Transform otherEnemy)
+    {
+        float distanceFromClosest = Vector3.Distance(closestEnemy.position, transform.position);
+        float distanceFromOther = Vector3.Distance(otherEnemy.position, transform.position);
+
+        if (distanceFromClosest < distanceFromOther)
+        {
+            return closestEnemy;
+        }
+        else
+        {
+            return otherEnemy;
         }
     }
 

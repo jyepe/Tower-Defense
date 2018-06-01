@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFinder : MonoBehaviour {
+public class PathFinder : MonoBehaviour
+{
 
     Dictionary<Vector3, Waypoint> path = new Dictionary<Vector3, Waypoint>();               //Stores all waypoints and their positions
     Waypoint[] waypoints;
@@ -33,7 +34,7 @@ public class PathFinder : MonoBehaviour {
         {
             return shortestPath;
         }
-        
+
     }
 
     //Puts all cubes in a dictionary and links to their position
@@ -53,7 +54,7 @@ public class PathFinder : MonoBehaviour {
     {
         queue.Enqueue(startCube);
 
-        while(queue.Count > 0)
+        while (queue.Count > 0)
         {
             currentCube = queue.Dequeue();
             currentCube.setIsExplored(true);
