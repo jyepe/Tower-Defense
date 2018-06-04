@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 [SelectionBase]
 [RequireComponent(typeof(Waypoint))]
 public class CubeEditor : MonoBehaviour
