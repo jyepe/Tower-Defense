@@ -6,6 +6,7 @@ public class EnemyDamage : MonoBehaviour
 {
 
     [SerializeField] int health = 5;
+    [SerializeField] ParticleSystem hitParticle;
 
 	// Use this for initialization
 	void Start ()
@@ -20,6 +21,7 @@ public class EnemyDamage : MonoBehaviour
     private void takeDamage()
     {
         health--;
+        hitParticle.Play();
 
         if (health == 0)
         {

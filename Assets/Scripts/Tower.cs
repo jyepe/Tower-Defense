@@ -54,7 +54,7 @@ public class Tower : MonoBehaviour
     {
         if (enemy != null && Vector3.Distance(enemy.position, transform.position) <= range)
         {
-            towerTop.LookAt(enemy);
+            towerTop.LookAt(enemy.transform.Find("Body"));
 
             if (!bullets.isPlaying)
             {
